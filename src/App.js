@@ -5,6 +5,11 @@ import ErrorBoundary from './ErrorBoundary';
 import ButtonCounter from './ButtonClickCounter';
 import TextCounter from './TextHoverCounter';
 
+// Render Props Imports
+import CounterRenderProps from './RenderPropsExample/CounterRenderProps';
+import ButtonCounterRenderProps from './RenderPropsExample/ButtonClickRenderProps';
+import TextHoverCounterRenderProps from './RenderPropsExample/TextHoverRenderProps';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,8 +33,20 @@ class App extends Component {
         <ErrorBoundary>
           <ContextAPI />
         </ErrorBoundary>
+        {/* Using HOC - Higher Order Components */}
         <ButtonCounter />
         <TextCounter />
+        <div>
+          {/* Using Render Props Example */}
+          <h2> ** Using Render Props Example ** </h2>
+          <CounterRenderProps render={
+              (count, handleClick) => <ButtonCounterRenderProps count={count} handleClick={handleClick} /> 
+            }
+          />
+          <CounterRenderProps
+            render={(count, handleClick) => <TextHoverCounterRenderProps count={count} handleClick={handleClick} />}
+          />
+        </div>
       </React.Fragment>
     );
   }
